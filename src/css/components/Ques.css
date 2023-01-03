@@ -1,0 +1,46 @@
+
+.quesContainer {
+  border-bottom: 0.5px solid gray;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 1.5em;
+  margin-bottom: 1.5em;
+  padding-inline: 0.2em;
+}
+
+.quesContainer .ques {
+  font-weight: 900;
+}
+
+.quesContainer .answers {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.quesContainer .answers .answer {
+  cursor: pointer;
+  padding-block: 0.5em;
+  padding-inline: 1em;
+  border: 0.5px solid gray;
+  border-radius: 0.7rem;
+}
+
+.quesContainer .answers .answer:hover {
+  box-shadow: inset 1px 1px 2px red, inset -1px -1px 2px red;
+  color: red;
+}
+
+.selected {
+  background: rgb(180, 111, 245);
+}
+
+.wrong {
+  background: rgb(237, 125, 84);
+  color: rgb(136, 57, 209);
+}
+
+.right {
+  background: rgb(102, 234, 216);
+}
