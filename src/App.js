@@ -132,7 +132,7 @@ function App() {
         ) : (
           <div className="main-menu">
             <h1 className="title">Quizzical</h1>
-            <p className="desc">Some desc if needed</p>
+            <p className="desc">Check Your knowledge</p>
 
             <button className="btn " onClick={gettingStarted}>
               start quiz
