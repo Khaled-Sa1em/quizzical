@@ -127,3 +127,9 @@
   font-weight: bold;
   text-transform: capitalize;
 }
+
+
+.result{
+  color: orangered;
+  font-weight: 500;
+}

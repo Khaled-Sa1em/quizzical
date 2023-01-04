@@ -120,7 +120,7 @@ function App() {
             <div className="small-menu">
               {checked && (
                 <p>
-                  your score in exam {started} is {result} out of{' '}
+                  your score in exam {started} is <span className='result'>{result}</span> out of{' '}
                   {questions.length}{' '}
                 </p>
               )}
