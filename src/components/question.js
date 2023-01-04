@@ -14,6 +14,8 @@ export default function Question(props) {
       id={answer.id}
       key={nanoid()}
       selected={answer.selected}
+      right={answer.right}
+      wrong={answer.wrong}
     />
   ))
 

@@ -3,11 +3,12 @@ import { nanoid } from 'nanoid'
 import './css/App.css'
 
 import Question from './components/question'
-
+let result = 0
 function App() {
   // ! states
   // const [started, setStarted] = React.useState(false)
-  const [started, setStarted] = React.useState(true)
+  const [started, setStarted] = React.useState(0)
+  // const [finished, setFinished] = React.useState(false)
   const [checked, setChecked] = React.useState(false)
   // questions Data
   const [questions, setQuestions] = React.useState([])
@@ -22,6 +23,8 @@ function App() {
       body: element,
       id: nanoid(),
       selected: false,
+      right: false,
+      wrong: false,
     }))
   // fetch data
   React.useEffect(() => {
@@ -45,7 +48,10 @@ function App() {
         setQuestions(questions)
       })
     }
-    getQuestions()
+    // ! this done the job but i don't no is there another way or not
+    if (started) {
+      getQuestions()
+    }
   }, [started])
 
   React.useEffect(() => {
@@ -56,10 +62,8 @@ function App() {
     )
   }, [questions])
 
-  // console.log(questions)
   // add selected and remove it from others
   function handleChoice(quesID, correct, ansBody) {
-    console.log(quesID, correct === ansBody)
     setQuestions((prev) =>
       prev.map((question) =>
         question.id === quesID
@@ -75,18 +79,64 @@ function App() {
       ),
     )
   }
+  function gettingStarted() {
+    setStarted(1)
+  }
+
+  //!!! check values
+
+  // let wrong = 0
+  function gettingChecked() {
+    if (!checked) {
+      result = 0
+      const checkQuestions = questions.map((ques) => ({
+        ...ques,
+        answers: ques.answers.map((answer) => {
+          if (ques.correct === answer.body) {
+            if (answer.selected) result++
+            return { ...answer, right: true }
+          } else if (answer.selected) {
+            return { ...answer, wrong: true }
+          } else {
+            return { ...answer }
+          }
+        }),
+      }))
+      setChecked(true)
+      setQuestions(checkQuestions)
+    } else {
+      setChecked(false)
+      setStarted((prev) => prev + 1)
+    }
+  }
 
   return (
     <div className="main">
       <div className="container">
         {started ? (
-          <div className="">{questionsElements}</div>
+          <div className="">
+            {questionsElements}
+
+            <div className="small-menu">
+              {checked && (
+                <p>
+                  your score in exam {started} is {result} out of{' '}
+                  {questions.length}{' '}
+                </p>
+              )}
+              <button className="btn" onClick={gettingChecked}>
+                {checked ? 'play-again' : 'Check values'}
+              </button>
+            </div>
+          </div>
         ) : (
-          <div className="app">
+          <div className="main-menu">
             <h1 className="title">Quizzical</h1>
             <p className="desc">Some desc if needed</p>
-            {/* Menu   */}
-            <button className="btn ">start quiz</button>
+
+            <button className="btn " onClick={gettingStarted}>
+              start quiz
+            </button>
           </div>
         )}
       </div>
